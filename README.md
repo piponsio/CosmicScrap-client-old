@@ -1,0 +1,2 @@
+# CosmicScrap-client
+CosmicScrap client

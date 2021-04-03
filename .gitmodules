@@ -1,0 +1,3 @@
+[submodule "LGuiJs"]
+	path = LGuiJs
+	url = https://github.com/piponsio/LGuiJs/
