@@ -70,12 +70,26 @@ new Input("submitInput", {
 		"margin": 5,
 		"radius": 10,
 		"type": "button"
-	}, function(me){
-		if(me._isClicked){
-
-		}
 	}
 );
+Element.getElement("submitInput").addEventListener("click", function(me){
+	console.log("Click en: "+me._id);
+	console.log(Element.getElement("userInput").getValue());
+	console.log(Element.getElement("passInput").getValue());
+	var url = "http://localhost:8080/user/login";
+	url += "?user=";
+	url += Element.getElement("userInput").getValue();
+	url += "&pass=";
+	url += sha256(Element.getElement("passInput").getValue());
+
+	me.doInGui(function(gui){
+		gui.httpRequest("GET", url, function(http){
+			if(http.readyState == 4 && http.status == 200){
+	  			console.log(http.responseText);
+			}
+		});
+	});
+});
 
 new Input("signInButton", {
 		"default-text": "SignIn",
@@ -96,7 +110,7 @@ new Input("signInButton", {
 		"type": "button"
 	}, function(me){
 		if(me._isClicked){
-			LGuiJs.getGui("main").setView(View.getView("singIn"));
+			//LGuiJs.getGui("main").setView(View.getView("singIn"));
 		}
 	}
 );
@@ -107,6 +121,9 @@ new Background("background", {
 	}
 );
 
+Element.getElement("background").addEventListener("click", function(me){
+	console.log("Click en: "+me._id);
+});
 
 
 new View("Home", function(view){
